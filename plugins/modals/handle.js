@@ -1,4 +1,4 @@
-import layout from 'layout.vue'
+import layout from './layout.vue'
 
 const VModal = {
   install(Vue) {
@@ -10,7 +10,7 @@ const VModal = {
       open(params) {
         VModal.EventBus.$emit('open', params)
       },
-      close() {
+      close(params) {
         VModal.EventBus.$emit('close', params)
       }
     }

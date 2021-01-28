@@ -36,21 +36,22 @@ export default {
     // open event
     VModal.EventBus.$on('open', params => {
       if(this.name === params.name) {
-        this.open()
+        this.open(params)
       }
     })
     // close event
     VModal.EventBus.$on('close', params => {
       if(this.name === params.name) {
-        this.close()
+        this.close(params)
       }
     })
   },
   methods: {
-    open() {
+    open(params) {
+      this.payload = params.payload
       this.visible = true
     },
-    close() {
+    close(params) {
       this.visible = false
     }
   }

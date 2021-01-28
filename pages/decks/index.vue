@@ -22,59 +22,52 @@
 				/>
 			</ul>
 		</div>
-		<!-- Modal -->
-		<v-modal name="CreateDeckModal">
-			<h2>Create a new deck</h2>
-      <DeckForm @saveForm="onSubmit" @closeModal="closeModal"/>
-		</v-modal>
+
 	</div>
 </template>
 
 <script>
-import axios from 'axios'
-
 import DeckItem from "@/components/Decks/DeckItem.vue";
-import DeckForm from "@/components/Decks/DeckForm.vue";
 export default {
-	// asyncData(context) {
-  //   console.log("asyncData is excuted!");
-	// 	return new Promise((resolve, reject) => {
-	// 		setTimeout(() => {
-	// 			resolve({
-	// 				decks: [
-	// 					{
-	// 						_id: 1,
-	// 						name: "Learn English",
-	// 						description:
-	// 							"<p>Exercitation donec metus facilisis sociosqu aut egestas dignissimos, quisquam vestibulum assumenda autem? Et magni pharetra vestibulum, dolores taciti, commodo aliqua.</p>",
-	// 						thumpnail:
-	// 							"https://msquynhphuong.gnomio.com/pluginfile.php/2/course/section/1/english-course.jpg",
-	// 					},
-	// 					{
-	// 						_id: 2,
-	// 						name: "Learn Japanese",
-	// 						description:
-	// 							"<p>Tempora suscipit ridiculus porro morbi blandit porro suscipit sint curabitur, wisi donec quisque perferendis ante, porttitor qui commodi alias accusamus.</p>",
-	// 						thumpnail:
-	// 							"https://msquynhphuong.gnomio.com/pluginfile.php/2/course/section/1/english-course.jpg",
-	// 					},
-	// 					{
-	// 						_id: 3,
-	// 						name: "Learn Chinese",
-	// 						description:
-	// 							"<p>Dui sagittis, similique interdum, facilis beatae inventore ultricies varius porttitor. Pretium hymenaeos dolorum rhoncus nostra, imperdiet risus, adipisicing elit provident.</p>",
-	// 						thumpnail:
-	// 							"https://msquynhphuong.gnomio.com/pluginfile.php/2/course/section/1/english-course.jpg",
-	// 					},
-	// 				],
-	// 			});
-  //     }, 1000);
-	// 	}).then(data => {
-  //     return data
-  //   }).catch(e => {
-  //     context.error(e)
-  //   });
-  // },
+	/* asyncData(context) {
+    console.log("asyncData is excuted!");
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve({
+					decks: [
+						{
+							_id: 1,
+							name: "Learn English",
+							description:
+								"<p>Exercitation donec metus facilisis sociosqu aut egestas dignissimos, quisquam vestibulum assumenda autem? Et magni pharetra vestibulum, dolores taciti, commodo aliqua.</p>",
+							thumpnail:
+								"https://msquynhphuong.gnomio.com/pluginfile.php/2/course/section/1/english-course.jpg",
+						},
+						{
+							_id: 2,
+							name: "Learn Japanese",
+							description:
+								"<p>Tempora suscipit ridiculus porro morbi blandit porro suscipit sint curabitur, wisi donec quisque perferendis ante, porttitor qui commodi alias accusamus.</p>",
+							thumpnail:
+								"https://msquynhphuong.gnomio.com/pluginfile.php/2/course/section/1/english-course.jpg",
+						},
+						{
+							_id: 3,
+							name: "Learn Chinese",
+							description:
+								"<p>Dui sagittis, similique interdum, facilis beatae inventore ultricies varius porttitor. Pretium hymenaeos dolorum rhoncus nostra, imperdiet risus, adipisicing elit provident.</p>",
+							thumpnail:
+								"https://msquynhphuong.gnomio.com/pluginfile.php/2/course/section/1/english-course.jpg",
+						},
+					],
+				});
+      }, 1000);
+		}).then(data => {
+      return data
+    }).catch(e => {
+      context.error(e)
+    });
+  }, */
   /* fetch(context) {
     console.log("asyncData is excuted!");
 		return new Promise((resolve, reject) => {
@@ -125,25 +118,14 @@ export default {
   },
 	methods: {
 		openModal() {
-			this.$modal.open({ name: "CreateDeckModal" });
-    },
-    closeModal() {
-      this.$modal.close({ name: "CreateDeckModal" });
-    },
-    onSubmit(deckData) {
-      const uri = "https://nuxtjs-tutorial-7151f-default-rtdb.firebaseio.com/decks.json"
-      axios.post(uri, deckData)
-      .then(data => {
-        console.log(data)
-      })
-      .catch(error => {
-        console(error)
-      })
+			this.$modal.open({ name: "DeckFormModal" });
     }
   },
   components: {
-    DeckItem,
-    DeckForm
+    DeckItem
+  },
+  head: {
+    title: "Decks List"
   }
 };
 </script>

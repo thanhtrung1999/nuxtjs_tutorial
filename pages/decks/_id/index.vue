@@ -2,7 +2,7 @@
 	<section>
 		<div class="row text-center">
 			<div class="container">
-				<h3>Deck #{{ $route.params.id }}: {{ deck.name }}</h3>
+				<h3>Deck: {{ deck.name }}</h3>
 				<div class="tools">
 					<button type="button" class="btn btn-outline-success">
 						Start now
@@ -10,9 +10,16 @@
 					<button
 						type="button"
 						class="btn btn-primary"
-						@click.prevent="openModal"
+						@click.prevent="openModal('CreateCardModal')"
 					>
 						Create a card
+					</button>
+					<button
+						type="button"
+						class="btn btn-warning"
+						@click.prevent="openModal('DeckFormModal')"
+					>
+						Edit deck
 					</button>
 				</div>
 				<hr class="divide" />
@@ -76,30 +83,26 @@
 </template>
 
 <script>
+import axios from "axios";
+
 import CardItem from "@/components/Cards/CardItem";
 export default {
-	validate({ params }) {
+	/* validate({ params }) {
 		return /^[0-9]$/.test(params.id);
-	},
-	asyncData(ct) {
-		return new Promise((resolve, reject) => {
-			setTimeout(() => {
-				resolve({
-					deck: {
-						_id: 1,
-						name: `Learn English by deck ${ct.params.id}`,
-						description:
-							"<p>Exercitation donec metus facilisis sociosqu aut egestas dignissimos, quisquam vestibulum assumenda autem? Et magni pharetra vestibulum, dolores taciti, commodo aliqua.</p>",
-						thumpnail:
-							"https://msquynhphuong.gnomio.com/pluginfile.php/2/course/section/1/english-course.jpg",
-					},
-				});
-			}, 1000);
-		}).then(data => {
-      return data
-    }).catch(e => {
-      console.log(e)
-    });
+	}, */
+	asyncData(context) {
+		console.log(context.route.params.id);
+		const uri = `https://nuxtjs-tutorial-7151f-default-rtdb.firebaseio.com/decks/${context.route.params.id}.json`;
+		return axios
+			.get(uri)
+			.then((response) => {
+				return {
+					deck: response.data,
+				};
+			})
+			.catch((err) => {
+				context.error(err);
+			});
 	},
 	data: () => ({
 		cards: [
@@ -136,13 +139,30 @@ export default {
 		],
 	}),
 	methods: {
-		openModal() {
-			this.$modal.open({ name: "CreateCardModal" });
+		openModal(name) {
+			switch (name) {
+				case "CreateCardModal": {
+					this.$modal.open({ name });
+					break;
+				}
+				case "DeckFormModal": {
+					this.$modal.open({
+						name,
+						payload: { ...this.deck, _id: this.$route.params.id },
+					});
+					break;
+				}
+			}
 		},
 		closeModal() {
 			this.$modal.close({ name: "CreateCardModal" });
 		},
-	},
+  },
+  head() {
+    return {
+      title: `Deck: ${this.deck.name}`
+    }
+  }
 };
 </script>
 

@@ -3,7 +3,7 @@
 		<div class="form-group">
 			<label for="name">Name</label>
 			<input
-        v-model="editedDeck.name"
+				v-model="editedDeck.name"
 				type="text"
 				id="name"
 				class="form-control"
@@ -13,18 +13,18 @@
 		<div class="form-group">
 			<label for="description">Description</label>
 			<textarea
-        v-model="editedDeck.description"
+				v-model="editedDeck.description"
 				id="description"
 				class="form-control"
 				cols="30"
-				rows="10"
+				rows="6"
 				placeholder="Please enter your description"
 			></textarea>
 		</div>
 		<div class="form-group">
 			<label for="thumpnail">Thumpnail</label>
 			<input
-        v-model="editedDeck.thumpnail"
+				v-model="editedDeck.thumpnail"
 				type="text"
 				id="thumpnail"
 				class="form-control"
@@ -40,11 +40,8 @@
 			>
 				Close
 			</button>
-			<button
-				type="submit"
-				class="btn btn-outline-success"
-			>
-				Create
+			<button type="submit" class="btn btn-outline-success">
+				{{ editedDeck && editedDeck._id ? 'Edit' : 'Create' }}
 			</button>
 		</div>
 	</form>
@@ -59,25 +56,27 @@ export default {
 			default: () => ({
 				name: "",
 				description: "",
-				thumpnail: ""
+				thumpnail: "",
 			}),
 		},
 	},
-	data: () => ({
-		editedDeck: this.deck
-			? { ...this.deck }
-			: {
-					name: "",
-					description: "",
-					thumpnail: "",
-			  },
-	}),
+	data() {
+		return {
+			editedDeck: this.deck
+				? { ...this.deck }
+				: {
+						name: "",
+						description: "",
+						thumpnail: "",
+          },
+		};
+	},
 	methods: {
 		onSave() {
-      this.$emit('saveForm', this.editedDeck)
-    },
+			this.$emit("saveForm", this.editedDeck);
+		},
 		closeModal() {
-			this.$emit('closeModal')
+			this.$emit("closeModal");
 		},
 	},
 };

@@ -14,6 +14,10 @@ export default {
     ]
   },
 
+  loading: {
+    height: "10px"
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/css/bootstrap.min.css',

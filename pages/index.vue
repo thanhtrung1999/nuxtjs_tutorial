@@ -1,5 +1,6 @@
 <template>
   <div class="container" id="root">
+    <event-alert messages="This is a alert Home page" class="mt-3" />
     <div class="banner">
       <div class="thumpnail"></div>
     </div>
@@ -27,7 +28,10 @@
 </template>
 
 <script>
-export default {};
+import EventAlert from '@/components/Alerts/EventAlert.vue';
+export default {
+  components: { EventAlert },
+};
 </script>
 
 <style lang="scss">

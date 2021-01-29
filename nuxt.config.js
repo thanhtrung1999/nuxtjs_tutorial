@@ -26,7 +26,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/modals/v-modal.js'
+    '~/plugins/modals/v-modal.js',
+    '~/plugins/core-component.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,7 +48,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: process.env.BASE_API_URL || 'https://nuxtjs-tutorial-7151f-default-rtdb.firebaseio.com'
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -61,5 +64,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    baseApiUrl: process.env.BASE_API_URL || 'https://nuxtjs-tutorial-7151f-default-rtdb.firebaseio.com',
+    firebaseApiKey: 'AIzaSyCki6kKV_5F90wsKNIxyNkdL-z69LKHwFI'
   }
 }

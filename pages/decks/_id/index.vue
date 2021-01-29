@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 import CardItem from "@/components/Cards/CardItem";
 export default {
@@ -92,12 +92,11 @@ export default {
 	}, */
 	asyncData(context) {
 		console.log(context.route.params.id);
-		const uri = `https://nuxtjs-tutorial-7151f-default-rtdb.firebaseio.com/decks/${context.route.params.id}.json`;
-		return axios
-			.get(uri)
-			.then((response) => {
+		const uri = `${process.env.baseApiUrl}/decks/${context.route.params.id}.json`;
+		return context.app.$axios.$get(uri)
+			.then((data) => {
 				return {
-					deck: response.data,
+					deck: data,
 				};
 			})
 			.catch((err) => {

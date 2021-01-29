@@ -4,6 +4,12 @@
   </main>
 </template>
 
+<script>
+export default {
+  middleware: 'auth'
+}
+</script>
+
 <style lang="scss">
   .main {
     margin-left: 3rem;

@@ -111,6 +111,7 @@ export default {
     this.$store.dispatch('setDecks', this.decks)
     console.log(this.$store.getters.decks)
   }, */
+  middleware: 'auth',
   computed: {
     decks() {
       return this.$store.getters.decks
